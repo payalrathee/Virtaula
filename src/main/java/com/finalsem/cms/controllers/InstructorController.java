@@ -1,4 +1,4 @@
-package com.finalsem.cms.Controllers;
+package com.finalsem.cms.controllers;
 
 public class InstructorController {
     // Get all courses

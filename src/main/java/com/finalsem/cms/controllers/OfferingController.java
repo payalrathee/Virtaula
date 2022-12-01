@@ -1,4 +1,4 @@
-package com.finalsem.cms.Controllers;
+package com.finalsem.cms.controllers;
 
 public class OfferingController {
     // Assign course to student

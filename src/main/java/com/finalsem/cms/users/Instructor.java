@@ -1,0 +1,102 @@
+package com.finalsem.cms.users;
+
+import com.finalsem.cms.entities.Course;
+import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
+
+import java.util.List;
+
+@Entity
+public class Instructor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int instructorId;
+    private String name;
+    private String email;
+    private String password;
+    private long phoneNumber;
+    private double salary;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name="instructor_offering",
+            joinColumns = {@JoinColumn(name="instructor_id")},
+            inverseJoinColumns={@JoinColumn(name="course_id")}
+    )
+    private List<Course> courses;
+
+    public Instructor() {
+    }
+
+    public Instructor(String name, String email, String password, long phoneNumber, double salary, List<Course> courses) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.salary = salary;
+        this.courses = courses;
+    }
+
+    public int getInstructorId() {
+        return instructorId;
+    }
+
+    public void setInstructorId(int instructorId) {
+        this.instructorId = instructorId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    @Override
+    public String toString() {
+        return "Instructor{" +
+                "instructorId=" + instructorId +
+                ", name='" + name + '\'' +
+                '}';
+    }
+}
