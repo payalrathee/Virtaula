@@ -1,8 +1,30 @@
 package com.finalsem.cms.Services;
+
 import com.finalsem.cms.entities.Course;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.finalsem.cms.repositories.CourseRepo;
+import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 import java.util.List;
 
-public interface CourseService {
+@Service
+public class CourseService {
 
-    public List<Course> getCourses();
+    @Autowired
+    CourseRepo courseRepo;
+
+    public List<Course> getCourses() {
+        List<Course> list = courseRepo.findAll();
+        return list;
+    }
+
+    public List<Course> getCoursesByInstructor(Integer id) {
+        List<Course> list = courseRepo.findAllById(Collections.singleton(id));
+        return list;
+    }
+
+    public void saveOrUpdate(Course course) {
+        courseRepo.save(course);
+    }
 }

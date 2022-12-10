@@ -15,10 +15,10 @@ public class MainController {
     CourseService courseService;
     @GetMapping("/home")
     public String home() {
-        return "Welcome to home page";
+        return "Welcome";
     }
 
-    @GetMapping("/courses")
+    @GetMapping("/home/courses")
     public List<Course> getCourses(){
         return courseService.getCourses();
     }
