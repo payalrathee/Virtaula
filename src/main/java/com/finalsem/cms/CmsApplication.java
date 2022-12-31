@@ -27,11 +27,12 @@ public class CmsApplication {
 		courseRepo.save(course);
 		System.out.println(courseRepo.findAll());
 
+
 		StudentRepo stRepo=ctx.getBean(StudentRepo.class);
 		System.out.println(stRepo);
 		List<Course> courses = new ArrayList<>();
 		courses.add(course);
-		stRepo.save(new Student("abc",9847733,"abc@gmail.com","abc","India", null,null));
+		stRepo.save(new Student("abc",9847733,"abc@gmail.com","abc","India", courses,null));
 		System.out.println(stRepo.findById(1).get());
 
 	}

@@ -79,5 +79,18 @@ public class Admin {
         }
     }
 
+
+    // Get a particular course
+    @GetMapping("/courses/{id}")
+    private ResponseEntity<Course> addCourse(@PathVariable("id") int id){
+        try{
+            Course course = courseService.getById(id);
+            return new ResponseEntity<>(course, HttpStatus.OK);
+        }
+        catch(Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
 

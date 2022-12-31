@@ -27,4 +27,8 @@ public class CourseService {
     public void saveOrUpdate(Course course) {
         courseRepo.save(course);
     }
+
+    public Course getById(int id) {
+        return courseRepo.findById(id).get();
+    }
 }

@@ -15,7 +15,7 @@ public class MainController {
     CourseService courseService;
     @GetMapping("/home")
     public String home() {
-        return "Welcome";
+        return "Welcome.html";
     }
 
     @GetMapping("/home/courses")
