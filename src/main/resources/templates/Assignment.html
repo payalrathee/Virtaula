@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" th:replace="base.html::layout(~{:: #content})">
+<head>
+    <meta charset="UTF-8">
+    <title>CMS</title>
+</head>
+<body>
+<div id="content">
+    <div class="wrapper" >
+        <div th:if="${#strings.equals(session.accountType,'instructor')}" style="width:30%;margin-left:auto;text-align:center;">
+            <a class="button link" th:href="@{'/course/updateAssignmentForm/'+${assignment.assignmentId}}">Update</a>
+        </div>
+        <div th:if="${#strings.equals(session.accountType,'instructor')}" style="width:30%;margin-left:auto;text-align:center;">
+            <a class="button link" style="background-color:red;" th:href="@{'/instructor/deleteAssignment/'+${assignment.assignmentId}}">Delete</a>
+        </div>
+        <div class="item-wrapper">
+            <span class="large-text" style="font-size:50px;" th:text="${assignment.topic}"></span>
+        </div>
+        <div class="item-wrapper">
+            <span class="text" th:text="${'Deadline : '+assignment.deadline}"></span>
+        </div>
+        <div class="item-wrapper">
+            <span class="text" th:text="${'Marks : '+assignment.marks}"></span>
+        </div>
+        <hr>
+        <div class="item-wrapper">
+            <span th:text="${assignment.description}"></span>
+        </div>
+        <div class="item-wrapper">
+            <a class="link" >Download file</a>
+        </div>
+        <hr>
+        <div th:if="${#strings.equals(session.accountType,'student')}" class="item-wrapper">
+            <h3 class="large-text">Submission</h3>
+            <form th:action="@{/student/submitAssignment}" method="post" style="width:30%;margin:auto;">
+                <input class="button" type="file" value="Upload File"/>
+                <input class="button" type="submit">
+            </form>
+        </div>
+        <div th:if="${#strings.equals(session.accountType,'instructor')}" class="item-wrapper">
+            <h3 class="large-text">Submissions</h3>
+            <ul>
+                <li th:each="submission:${assignment.submissions}">
+                    <div class="item-wrapper">
+                        <p th:text="${submission.student.email}"></p>
+                        <p class="text" th:text="${'Submitted on : '+submission.submissionDate}"></p>
+                        <a class="link">download File</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

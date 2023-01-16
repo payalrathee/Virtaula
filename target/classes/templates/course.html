@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" th:replace="base.html::layout(~{:: #content})">
+<head>
+    <meta charset="UTF-8">
+    <title>CMS</span></title>
+</head>
+<body>
+<div id="content">
+    <div class="wrapper">
+    <div th:if="${#strings.equals(session.accountType,'admin')}" style="width:30%;margin-left:auto;text-align:center;">
+        <a class="button link" th:href="@{'/course/updateCourseForm/'+${course.courseId}}">Update Course</a>
+    </div>
+        <div th:if="${#strings.equals(session.accountType,'admin')}" style="width:30%;margin-left:auto;text-align:center;">
+            <a class="button link" style="background-color:red;" th:href="@{'/admin/deleteCourse/'+${course.courseId}}">Delete Course</a>
+        </div>
+        <div class="item-wrapper">
+            <span class="large-text" style="font-size:50px;" th:text="${course.name}"></span>
+        </div>
+        <div class="item-wrapper">
+            <span class="text" th:text="${course.subject}"></span>
+        </div>
+        <hr>
+        <div class="item-wrapper">
+            <span th:text="${'Duration : '+course.duration+' months'}"></span>
+        </div>
+        <div class="item-wrapper">
+            <span th:text="${'Schedule : '+course.schedule.startDate+' - '+course.schedule.endDate}"></span>
+        </div>
+        <div class="item-wrapper">
+            <span th:text="${'Batch Size : '+course.batchSize}"></span>
+        </div>
+        <div class="item-wrapper">
+            <span >Tutors : </span><br>
+            <ul>
+                <li th:each="tutor:${course.instructors}">
+                    <p class="text" th:text="${tutor.name}"></p>
+                </li>
+            </ul>
+        </div>
+
+    <hr>
+    <div class="item-wrapper" style="width:30%;margin:auto;text-align:center;">
+        <a th:href="@{'/course/studyMaterial/'+${course.courseId}}" class="button link">Study Material</a>
+        <a th:href="@{'/course/assignments/'+${course.courseId}}" class="button link">Assignments</a>
+    </div>
+        <hr>
+        <div class="item-wrapper">
+            <span >Students enrolled : </span><br>
+            <ul>
+                <li th:each="student:${course.students}">
+                    <p class="text" th:text="${student.email}"></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

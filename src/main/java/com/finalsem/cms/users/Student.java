@@ -15,7 +15,7 @@ public class Student {
     private long phoneNumber;
     private String email;
     private String password;
-    private String country;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name="enrollment",
@@ -28,12 +28,11 @@ public class Student {
     public Student() {
     }
 
-    public Student(String name, long phoneNumber, String email, String password, String country, List<Course> courses, List<Submission> submissions) {
+    public Student(String name, String email, long phoneNumber, String password, List<Course> courses, List<Submission> submissions) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
-        this.country = country;
         this.courses = courses;
         this.submissions = submissions;
     }
@@ -76,14 +75,6 @@ public class Student {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public List<Course> getCourses() {

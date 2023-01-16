@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" th:fragment="layout(content)">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMS</title>
+  <link th:href="@{/CSS/base.css}" rel="stylesheet"/>
+  <link th:href="@{/CSS/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div id="navbar">
+  <div class="nav-item" >
+    <span id="cms">CMS</span><hr><hr>
+  </div>
+  <div class="nav-item highlight" th:switch="${session.accountType}">
+    <a th:case="student" class="link" th:href="@{/student/courses}">Courses</a>
+    <a th:case="instructor" class="link" th:href="@{/instructor/courses}">Courses</a>
+    <a th:case="admin" class="link" th:href="@{/admin/courses}">Courses</a>
+  </div>
+  <div class="nav-item highlight" th:if="${#strings.equals(session.accountType,'admin')}">
+    <a class="link" th:href="@{/course/addCourseForm}">Add Course</a>
+  </div>
+  <div class="nav-item highlight">
+    <a class="link" th:href="@{/about}">About CMS</a>
+  </div>
+  <div class="nav-item">
+    <a href=""><img id="dp" th:src="@{/images/bg.jpg}" /></a>
+  </div>
+  <div class="nav-item highlight">
+    <a class="link" th:href="@{/logout}">Logout</a>
+  </div>
+</div>
+<div th:replace="${content}">
+</div>
+
+</div>
+</body>
+</html>

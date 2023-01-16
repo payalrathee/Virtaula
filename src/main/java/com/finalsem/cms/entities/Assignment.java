@@ -12,6 +12,7 @@ public class Assignment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int assignmentId;
     private String topic;
+    private String description;
     @Lob
     private Blob questionSet;
     private Date deadline;
@@ -25,8 +26,9 @@ public class Assignment {
     public Assignment() {
     }
 
-    public Assignment(String topic, Blob questionSet, Date deadline, int marks, Course course, List<Submission> submissions) {
+    public Assignment(String topic,String description, Blob questionSet, Date deadline, int marks, Course course, List<Submission> submissions) {
         this.topic = topic;
+        this.description=description;
         this.questionSet = questionSet;
         this.deadline = deadline;
         this.marks = marks;
@@ -44,6 +46,14 @@ public class Assignment {
 
     public String getTopic() {
         return topic;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setTopic(String topic) {

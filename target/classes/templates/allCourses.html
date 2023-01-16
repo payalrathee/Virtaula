@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" th:replace="base.html::layout(~{:: #content})">
+<head>
+    <meta charset="UTF-8">
+    <title>CMS-Courses</title>
+    <link th:href="@{/CSS/style.css}" rel="stylesheet"/>
+</head>
+<body>
+    <div id="content">
+       <div th:if="${#strings.equals(session.accountType,'student')}" style="width:30%;margin:auto;text-align:center;">
+            <a class="button link" th:href="@{/enrollForm}">Enroll</a>
+       </div>
+        <div class="item-wrapper">
+            <h1 class="large-text" style="text-align:center;">All Courses</h1>
+        </div>
+      <div class="wrapper" th:each="course:${courseList}">
+          <a th:href="@{'/course/courseDetails/'+${course.courseId}}" class="large-text" style="text-decoration:none;" th:text="${course.name}"></a>
+          <i><p th:text="${'Duration : '+course.duration+' months'}"></p></i>
+          <i><p class="text" th:text="${course.schedule.startDate+' - '+course.schedule.endDate}"></p></i>
+      </div>
+    </div>
+</body>
+</html>

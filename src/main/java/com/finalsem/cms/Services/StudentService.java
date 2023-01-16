@@ -1,5 +1,6 @@
 package com.finalsem.cms.Services;
 
+import com.finalsem.cms.entities.Course;
 import com.finalsem.cms.users.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +23,23 @@ public class StudentService {
         return studentRepo.findById(id).get();
     }
 
-    public void saveOrUpdate(Student student) {
+    public void saveOrUpdateStudent(Student student) {
         studentRepo.save(student);
     }
 
     public void deleteStudent(int id) {
         studentRepo.deleteById(id);
+    }
+    public List<Course> getCourses(int id)
+    {
+        return studentRepo.findById(id).get().getCourses();
+    }
+
+    public int validateStudent(String email,String password)
+    {
+        Student s=studentRepo.findByEmailAndPassword(email,password);
+        if(s!=null)
+            return s.getStudentId();
+        return -1;
     }
 }

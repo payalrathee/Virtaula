@@ -1,0 +1,33 @@
+#signin
+{
+     position:absolute;
+     top:30px;
+     right:15px;
+}
+.heading
+{
+    color:rgb(35, 171, 235);
+    text-align:center;
+    font-size:35px;
+}
+#signup-wrapper
+{
+    width:30%;
+    height:44vh;
+}
+.accountType
+{
+    margin: 8px;
+}
+#forgotPwd
+{
+    position:absolute;
+    right:10%;
+}
+@media (max-width:800px)
+{
+#login-wrapper
+{
+    width:80%;
+}
+}

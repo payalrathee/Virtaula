@@ -1,0 +1,36 @@
+#wrapper
+{
+    background-color: transparent;
+    width: 40%;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.type
+{
+    margin: 10px;
+    background-color: rgb(254, 254, 255);
+    opacity: 0.8;
+    padding: 30px;
+    border-radius: 3px;
+    width: 80px;
+    height: 40px;
+    text-align: center;
+
+}
+.type:hover{
+    box-shadow: 0px 0px 5px #aaa,0px 0px 3px black;
+}
+
+@media (max-width:800px)
+{
+#wrapper
+{
+    width:60%;
+    flex-direction: column;
+}
+.type{
+    width:50%;
+}
+}

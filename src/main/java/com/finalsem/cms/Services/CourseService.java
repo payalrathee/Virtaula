@@ -1,6 +1,11 @@
 package com.finalsem.cms.Services;
 
+import com.finalsem.cms.entities.Assignment;
 import com.finalsem.cms.entities.Course;
+import com.finalsem.cms.entities.StudyMaterial;
+import com.finalsem.cms.repositories.AssignmentRepo;
+import com.finalsem.cms.repositories.StudentRepo;
+import com.finalsem.cms.repositories.StudyMaterialRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.finalsem.cms.repositories.CourseRepo;
 import org.springframework.stereotype.Service;
@@ -13,6 +18,10 @@ public class CourseService {
 
     @Autowired
     CourseRepo courseRepo;
+    @Autowired
+    StudyMaterialRepo studyMaterialRepo;
+    @Autowired
+    AssignmentRepo assignmentRepo;
 
     public List<Course> getCourses() {
         List<Course> list = courseRepo.findAll();
@@ -28,7 +37,23 @@ public class CourseService {
         courseRepo.save(course);
     }
 
-    public Course getById(int id) {
+    public Course getCourse(int id) {
         return courseRepo.findById(id).get();
+    }
+    public List<StudyMaterial> getStudyMaterialList(int courseId)
+    {
+        return courseRepo.findById(courseId).get().getMaterial();
+    }
+    public List<Assignment> getAssignmentList(int courseId)
+    {
+        return courseRepo.findById(courseId).get().getAssignments();
+    }
+    public StudyMaterial getStudyMaterial(int id)
+    {
+        return studyMaterialRepo.findById(id).get();
+    }
+    public Assignment getAssignment(int id)
+    {
+        return assignmentRepo.findById(id).get();
     }
 }

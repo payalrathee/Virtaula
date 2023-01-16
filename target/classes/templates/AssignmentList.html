@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" th:replace="base.html::layout(~{:: #content})">
+<head>
+    <meta charset="UTF-8">
+    <title>CMS-Assignments</title>
+</head>
+<body>
+<div id="content">
+    <div th:if="${#strings.equals(session.accountType,'instructor')}" style="width:30%;margin:auto;text-align:center;">
+        <a class="button link" th:href="@{'/course/addMaterialForm'+${courseId}}">Add Assignment</a>
+    </div>
+    <div class="item-wrapper">
+        <h1 class="large-text" style="text-align:center;">Assignments</h1>
+    </div>
+    <div class="wrapper" th:each="assignment:${assignmentList}">
+        <a th:href="@{'/course/assignmentDetails/'+${assignment.assignmentId}}" class="large-text" style="text-decoration:none;" th:text="${assignment.topic}"></a>
+        <i><p th:text="${'Deadline : '+assignment.deadline}"></p></i>
+        <i><p class="text" th:text="${'Marks : '+assignment.marks}"></p></i>
+    </div>
+</div>
+</body>
+</html>

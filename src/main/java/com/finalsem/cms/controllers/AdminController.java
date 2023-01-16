@@ -1,24 +1,39 @@
 package com.finalsem.cms.controllers;
 
+import com.finalsem.cms.Services.AdminService;
 import com.finalsem.cms.Services.CourseService;
 import com.finalsem.cms.Services.StudentService;
 import com.finalsem.cms.entities.Course;
+import com.finalsem.cms.users.Admin;
+import com.finalsem.cms.users.Instructor;
 import com.finalsem.cms.users.Student;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8080")
-@RestController
+@Controller
 @RequestMapping("/admin")
-public class Admin {
+public class AdminController {
     @Autowired
     StudentService studentService;
     @Autowired
     CourseService courseService;
+    @Autowired
+    AdminService adminService;
+
+    @PostMapping("/addAdmin")
+    public String addAdmin(@ModelAttribute Admin admin)
+    {
+        adminService.saveOrUpdateAdmin(admin);
+        return "redirect:/signinForm";
+    }
 
     // Get list of students
     @GetMapping("/students")
@@ -41,7 +56,7 @@ public class Admin {
     @PutMapping("/students/{id}")
     private ResponseEntity<Student> updateStudent(@PathVariable("id") int id, @RequestBody Student student){
         try{
-            studentService.saveOrUpdate(student);
+            studentService.saveOrUpdateStudent(student);
             return new ResponseEntity<>(student, HttpStatus.OK);
         }
         catch(Exception e) {
@@ -53,7 +68,7 @@ public class Admin {
     @PostMapping("/students")
     private ResponseEntity<Student> updateStudent(@RequestBody Student student){
         try{
-            studentService.saveOrUpdate(student);
+            studentService.saveOrUpdateStudent(student);
             return new ResponseEntity<>(student, HttpStatus.OK);
         }
         catch(Exception e) {
@@ -84,7 +99,7 @@ public class Admin {
     @GetMapping("/courses/{id}")
     private ResponseEntity<Course> addCourse(@PathVariable("id") int id){
         try{
-            Course course = courseService.getById(id);
+            Course course = courseService.getCourse(id);
             return new ResponseEntity<>(course, HttpStatus.OK);
         }
         catch(Exception e) {
@@ -92,5 +107,11 @@ public class Admin {
         }
     }
 
+    @RequestMapping("/courses")
+    public String courses(Model model)
+    {
+        model.addAttribute("courseList",courseService.getCourses());
+        return "allCourses";
+    }
 }
 

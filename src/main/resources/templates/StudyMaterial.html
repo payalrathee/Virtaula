@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" th:replace="base.html::layout(~{:: #content})">
+<head>
+    <meta charset="UTF-8">
+    <title>CMS</title>
+</head>
+<body>
+<div id="content">
+    <div class="wrapper" >
+        <div th:if="${#strings.equals(session.accountType,'instructor')}" style="width:30%;margin-left:auto;text-align:center;">
+            <a class="button link" th:href="@{'/course/updateMaterialForm/'+${studyMaterial.studyMaterialId}}">Update</a>
+        </div>
+        <div th:if="${#strings.equals(session.accountType,'instructor')}" style="width:30%;margin-left:auto;text-align:center;">
+            <a class="button link" style="background-color:red;" th:href="@{'/instructor/deleteStudyMaterial/'+${studyMaterial.studyMaterialId}}">Delete</a>
+        </div>
+        <div class="item-wrapper">
+            <span class="large-text" style="font-size:50px;" th:text="${studyMaterial.title}"></span>
+        </div>
+        <hr>
+        <div class="item-wrapper">
+            <span th:text="${studyMaterial.description}"></span>
+        </div>
+        <div class="item-wrapper">
+            <a class="link" >Download file</a>
+        </div>
+    </div>
+</body>
+</html>
