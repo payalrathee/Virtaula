@@ -113,5 +113,18 @@ public class AdminController {
         model.addAttribute("courseList",courseService.getCourses());
         return "allCourses";
     }
+
+    @RequestMapping("/addCourseForm")
+    public String addCourseForm()
+    {
+        return "addCourse";
+    }
+
+    @PostMapping("/addCourse")
+    public String addCourse()
+    {
+        //
+        return "redirect:/admin/courses";
+    }
 }
 

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" th:replace="base.html::layout(~{:: #content})">
+<head>
+  <meta charset="UTF-8">
+  <title>CMS-add study material</title>
+</head>
+<body>
+<div id="content">
+  <form class="wrapper" th:action="@{/instructor/addStudyMaterial}" method="post" style="width:70%;">
+    <h1 class="large-text" style="text-align:center;">Add Study Material</h1>
+    <input type="hidden" name="course" value="">
+    <h3 class="text">Title</h3>
+    <input type="text" class="input" placeholder="Enter title" name="title">
+    <hr>
+    <h3 class="text">Add file</h3>
+    <input type="file" class="input" name="file">
+    <hr>
+    <h3 class="text">Description</h3>
+    <textarea class="input" name="description" style="height:20vh;">
+    </textarea>
+  </form>
+</div>
+</body>
+</html>

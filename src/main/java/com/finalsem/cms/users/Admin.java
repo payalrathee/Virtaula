@@ -14,15 +14,17 @@ public class Admin {
     private String email;
     private long phoneNumber;
     private String password;
+    private String dp;
 
     public Admin() {
     }
 
-    public Admin(String name, String email, long phoneNumber, String password) {
+    public Admin(String name, String email, long phoneNumber, String password,String dp) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.dp=dp;
     }
 
     public int getAdminId() {
@@ -63,6 +65,14 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getDp() {
+        return dp;
+    }
+
+    public void setDp(String dp) {
+        this.dp = dp;
     }
 
     @Override

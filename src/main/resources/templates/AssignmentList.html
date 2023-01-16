@@ -7,7 +7,7 @@
 <body>
 <div id="content">
     <div th:if="${#strings.equals(session.accountType,'instructor')}" style="width:30%;margin:auto;text-align:center;">
-        <a class="button link" th:href="@{'/course/addMaterialForm'+${courseId}}">Add Assignment</a>
+        <a class="button link" th:href="@{'/instructor/addAssignmentForm/'+${courseId}}">Add Assignment</a>
     </div>
     <div class="item-wrapper">
         <h1 class="large-text" style="text-align:center;">Assignments</h1>

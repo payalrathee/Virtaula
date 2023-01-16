@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" th:replace="base.html::layout(~{:: #content})">
+<head>
+    <meta charset="UTF-8">
+    <title>CMS-enroll</title>
+</head>
+<body>
+  <div id="content">
+    <form class="wrapper" th:action="@{/student/enroll}" method="post" style="height:40vh;width:40%;">
+        <div class="alert alert-danger" role="alert" th:if="${errorMessage}">
+            <p th:text="${errorMessage}"></p>
+        </div>
+      <h1 class="large-text" style="text-align:center;">Enroll</h1>
+      <input type="text" class="input" placeholder="Enter course id" name="courseId">
+      <input type="password" class="input" placeholder="Enter code" name="code">
+      <input type="submit" class="button">
+    </form>
+  </div>
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.finalsem.cms.Services;
 
 import com.finalsem.cms.entities.Course;
+import com.finalsem.cms.repositories.CourseRepo;
 import com.finalsem.cms.users.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,8 @@ import java.util.Optional;
 public class StudentService {
     @Autowired
     StudentRepo studentRepo;
+    @Autowired
+    CourseRepo courseRepo;
 
     public List<Student> getStudents(){
         return studentRepo.findAll();
@@ -41,5 +44,19 @@ public class StudentService {
         if(s!=null)
             return s.getStudentId();
         return -1;
+    }
+    public boolean enroll(int courseId, String code, int studentId)
+    {
+        Course course=courseRepo.findByCourseIdAndCode(courseId,code);
+        if(course!=null)
+        {
+            Student student=studentRepo.findById(studentId).get();
+            student.getCourses().add(course);
+            studentRepo.save(student);
+            course.getStudents().add(student);
+            courseRepo.save(course);
+            return true;
+        }
+        return false;
     }
 }

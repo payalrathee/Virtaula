@@ -49,4 +49,30 @@ public class InstructorController {
         instructorService.saveOrUpdateInstructor(instructor);
         return "redirect:/signinForm";
     }
+
+    @GetMapping("/addAssignmentForm/{courseId}")
+    public String addAssignmentForm(@PathVariable("courseId") int courseId,Model model)
+    {
+        model.addAttribute("courseId",courseId);
+        return "addAssignment";
+    }
+
+    @PostMapping("/addAssignment")
+    public String addAssignment()
+    {
+        return "redirect:/course/assignments/";
+    }
+
+    @GetMapping("/addStudyMaterialForm/{courseId}")
+    public String addStudyMaterialForm(@PathVariable("courseId") int courseId,Model model)
+    {
+        model.addAttribute("courseId",courseId);
+        return "addStudyMaterial";
+    }
+
+    @PostMapping("/addStudyMaterial")
+    public String addStudyMaterial()
+    {
+        return "redirect:/course/studyMaterial/";
+    }
 }

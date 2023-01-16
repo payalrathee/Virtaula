@@ -11,6 +11,7 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int courseId;
+    private String code;
     private String name;
     private double duration;
     private int batchSize;
@@ -30,7 +31,8 @@ public class Course {
     public Course() {
     }
 
-    public Course(String name, double duration, int batchSize, String subject, Schedule schedule, double price, List<Assignment> assignments, List<StudyMaterial> material, List<Student> students, List<Instructor> instructors) {
+    public Course(String code,String name, double duration, int batchSize, String subject, Schedule schedule, double price, List<Assignment> assignments, List<StudyMaterial> material, List<Student> students, List<Instructor> instructors) {
+        this.code=code;
         this.name = name;
         this.duration = duration;
         this.batchSize = batchSize;
@@ -41,6 +43,14 @@ public class Course {
         this.material = material;
         this.students = students;
         this.instructors = instructors;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public int getCourseId() {

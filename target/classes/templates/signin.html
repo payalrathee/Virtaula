@@ -20,7 +20,7 @@
 </div>
 <form method="post" th:action="@{/signin}" id="login-wrapper" class="forms-wrapper">
     <div class="alert alert-danger" role="alert" th:if="${errorMessage}">
-            <p th:text="${errorMessage}">error</p>
+            <p th:text="${errorMessage}"></p>
     </div>
 
     <h1 class="heading">Sign In</h1>

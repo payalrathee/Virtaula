@@ -6,10 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/student")
@@ -24,7 +21,20 @@ public class StudentController {
         return "allCourses";
     }
 
+    @RequestMapping("/enrollForm")
+    public String enrollForm()
+    {
+        return "enroll";
+    }
     // Enroll in any course
+    @PostMapping("/enroll")
+    public String enroll(@RequestParam("courseId") int courseId,@RequestParam("code") String code,HttpSession session,Model model)
+    {
+        if(studentService.enroll(courseId,code, (Integer) session.getAttribute("id")))
+        return "redirect:/student/courses";
+        model.addAttribute("errorMessage","Course id or code is incorrect!");
+        return "enroll";
+    }
     //add student
     @PostMapping("/addStudent")
     public String addStudent(@ModelAttribute Student student)
