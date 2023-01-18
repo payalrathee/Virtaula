@@ -8,7 +8,7 @@
 <div id="content">
     <div class="wrapper">
     <div th:if="${#strings.equals(session.accountType,'admin')}" style="width:30%;margin-left:auto;text-align:center;">
-        <a class="button link" th:href="@{'/course/updateCourseForm/'+${course.courseId}}">Update Course</a>
+        <a class="button link" th:href="@{'/admin/updateCourseForm/'+${course.courseId}}">Update Course</a>
     </div>
         <div th:if="${#strings.equals(session.accountType,'admin')}" style="width:30%;margin-left:auto;text-align:center;">
             <a class="button link" style="background-color:red;" th:href="@{'/admin/deleteCourse/'+${course.courseId}}">Delete Course</a>

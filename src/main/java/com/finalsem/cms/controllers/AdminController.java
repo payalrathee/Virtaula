@@ -126,5 +126,19 @@ public class AdminController {
         //
         return "redirect:/admin/courses";
     }
+
+    @RequestMapping("/updateCourseForm/{id}")
+    public String updateCourseForm(@PathVariable("id") int id,Model model)
+    {
+        model.addAttribute("course",courseService.getCourse(id));
+        return "updateCourse";
+    }
+
+    @PostMapping("/updateCourse")
+    public String updateCourse()
+    {
+        //
+        return "redirect:/course/courseDetails";
+    }
 }
 

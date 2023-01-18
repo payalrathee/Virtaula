@@ -75,4 +75,32 @@ public class InstructorController {
     {
         return "redirect:/course/studyMaterial/";
     }
+
+    @RequestMapping("/updateStudyMaterialForm/{id}")
+    public String updateStudyMaterialForm(@PathVariable("id") int id,Model model)
+    {
+        model.addAttribute("studyMaterial",courseService.getStudyMaterial(id));
+        return "updateStudyMaterial";
+    }
+
+    @PostMapping("/updateStudyMaterial")
+    public String updateStudyMaterial()
+    {
+        //
+        return "redirect:/course/studyMaterialDetails";
+    }
+
+    @RequestMapping("/updateAssignmentForm/{id}")
+    public String updateAssignmentForm(@PathVariable("id") int id,Model model)
+    {
+        model.addAttribute("assignment",courseService.getAssignment(id));
+        return "updateAssignment";
+    }
+
+    @PostMapping("/updateAssignment")
+    public String updateAssignment()
+    {
+        //
+        return "redirect:/course/assignmentDetails";
+    }
 }
