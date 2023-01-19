@@ -32,11 +32,8 @@ public class InstructorService {
         return instructorRepo.findById(id).get().getCourses();
     }
 
-    public int validateInstructor(String email,String password)
+    public Instructor validateInstructor(String email,String password)
     {
-        Instructor i=instructorRepo.findByEmailAndPassword(email, password);
-        if(i!=null)
-            return i.getInstructorId();
-        return -1;
+        return instructorRepo.findByEmailAndPassword(email, password);
     }
 }

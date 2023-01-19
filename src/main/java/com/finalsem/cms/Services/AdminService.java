@@ -28,11 +28,8 @@ public class AdminService {
         adminRepo.deleteById(id);
     }
 
-    public int validateAdmin(String email,String password)
+    public Admin validateAdmin(String email,String password)
     {
-        Admin a=adminRepo.findByEmailAndPassword(email, password);
-        if(a!=null)
-            return a.getAdminId();
-        return -1;
+        return adminRepo.findByEmailAndPassword(email, password);
     }
 }

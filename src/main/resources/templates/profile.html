@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" th:replace="base.html::layout(~{:: #content})">
+<head>
+  <meta charset="UTF-8">
+  <title>CMS-profile</title>
+</head>
+<body>
+<div id="content">
+  <h1 class="large-text" style="text-align:center;">Profile</h1>
+  <div th:switch="${session.accountType}">
+    <form th:case="student" class="wrapper" th:action="@{/student/updateProfile}" method="post" style="width:70%;">
+      <div class="item-wrapper" style="text-align:center;">
+        <img th:src="${dp}" style="height=100px;width:100px;border-radius:3px;"/>
+      </div>
+      <span class="text">ID</span>
+      <input readonly type="text" class="input" name="studentId" th:attr="value=${id}"><br>
+      <div th:replace="fragments.html::form"></div>
+    </form>
+    <form th:case="instructor" class="wrapper" th:action="@{/instructor/updateProfile}" method="post" style="width:70%;">
+      <div class="item-wrapper" style="text-align:center;">
+        <img th:src="${dp}" style="height=100px;width:100px;border-radius:3px;"/>
+      </div>
+      <span class="text">ID</span>
+      <input readonly type="text" class="input" name="instructorId" th:attr="value=${id}"><br>
+      <div th:replace="fragments.html::form"></div>
+    </form>
+    <form th:case="admin" class="wrapper" th:action="@{/admin/updateProfile}" method="post" style="width:70%;">
+      <div class="item-wrapper" style="text-align:center;">
+        <img th:src="${dp}" style="height=100px;width:100px;border-radius:3px;"/>
+      </div>
+      <span class="text">ID</span>
+      <input readonly type="text" class="input" name="adminId" th:attr="value=${id}"><br>
+      <div th:replace="fragments.html::form"></div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

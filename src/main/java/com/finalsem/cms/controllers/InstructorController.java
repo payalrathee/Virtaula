@@ -3,6 +3,7 @@ package com.finalsem.cms.controllers;
 import com.finalsem.cms.Services.CourseService;
 import com.finalsem.cms.Services.InstructorService;
 import com.finalsem.cms.entities.Course;
+import com.finalsem.cms.users.Admin;
 import com.finalsem.cms.users.Instructor;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +23,6 @@ public class InstructorController {
     @Autowired
     InstructorService instructorService;
 
-    // Get all courses
-    @GetMapping("/courses/{id}")
-    private ResponseEntity<List<Course>> getCourses(@PathVariable("id") int id){
-        try{
-            return new ResponseEntity<>(courseService.getCoursesByInstructor(id), HttpStatus.OK);
-        }
-        catch(Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-   // private List<Courses>
     @RequestMapping("/courses")
     public String courses(Model model, HttpSession session)
     {
@@ -40,12 +30,10 @@ public class InstructorController {
         return "allCourses";
     }
 
-    // CRUD assignment
-    // Get list all student
-
     @PostMapping("/addInstructor")
     public String addInstructor(@ModelAttribute Instructor instructor)
     {
+        instructor.setDp("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBKxzxsHLzob3TZu7h3qZBGu7wI8ZKnN8pnA&usqp=CAU");
         instructorService.saveOrUpdateInstructor(instructor);
         return "redirect:/signinForm";
     }
@@ -102,5 +90,32 @@ public class InstructorController {
     {
         //
         return "redirect:/course/assignmentDetails";
+    }
+
+    @RequestMapping("/profile")
+    public String profile(Model model,HttpSession session)
+    {
+        Instructor instructor=instructorService.getInstructor((Integer) session.getAttribute("id"));
+        model.addAttribute("id",instructor.getInstructorId());
+        model.addAttribute("name",instructor.getName());
+        model.addAttribute("email",instructor.getEmail());
+        model.addAttribute("phone",instructor.getPhoneNumber());
+        model.addAttribute("password",instructor.getPassword());
+        model.addAttribute("dp",instructor.getDp());
+        return "profile";
+    }
+
+    @PostMapping("/updateProfile")
+    public String updateProfile(@ModelAttribute Instructor instructor,HttpSession session)
+    {
+        instructorService.saveOrUpdateInstructor(instructor);
+
+        session.setAttribute("id",instructor.getInstructorId());
+        session.setAttribute("email",instructor.getEmail());
+        session.setAttribute("password",instructor.getPassword());
+        session.setAttribute("accountType","instructor");
+        session.setAttribute("dp",instructor.getDp());
+
+        return "redirect:/instructor/profile";
     }
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="form">
+    <p class="text">Name</p>
+  <input type="text" class="input" placeholder="Enter name" name="name" th:attr="value=${name}"><br>
+    <p class="text">Email</p>
+    <input type="email" class="input" placeholder="Enter email" name="email" th:attr="value=${email}"><br>
+    <p class="text">Phone Number</p>
+  <input type="text" class="input" placeholder="Enter phone number" name="phoneNumber" th:attr="value=${phone}"><br>
+    <p class="text">Password</p>
+  <input type="text" class="input" placeholder="Enter password" name="password" th:attr="value=${password}"><br>
+    <p class="text">DP</p>
+  <input type="text" class="input" placeholder="Enter url of dp" name="dp" th:attr="value=${dp}"><br>
+  <input type="submit" class="button" value="Save"/>
+</div>
+</body>
+</html>
+<!--https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRy4K-n-7ETEUsThljjTPgGdVQ0zvTZY1ktnQ&usqp=CAU-->
+<!--https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJ3TvhnpqmemYlbp0RooLJiQi_rqDglgtmZA&usqp=CAU-->

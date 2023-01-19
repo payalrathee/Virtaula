@@ -1,6 +1,7 @@
 package com.finalsem.cms.controllers;
 
 import com.finalsem.cms.Services.StudentService;
+import com.finalsem.cms.users.Admin;
 import com.finalsem.cms.users.Student;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,35 @@ public class StudentController {
     @PostMapping("/addStudent")
     public String addStudent(@ModelAttribute Student student)
     {
+        student.setDp("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBKxzxsHLzob3TZu7h3qZBGu7wI8ZKnN8pnA&usqp=CAU\"");
         studentService.saveOrUpdateStudent(student);
         return "redirect:/signinForm";
+    }
+
+    @RequestMapping("/profile")
+    public String profile(Model model,HttpSession session)
+    {
+        Student student=studentService.getStudent((Integer) session.getAttribute("id"));
+        model.addAttribute("id",student.getStudentId());
+        model.addAttribute("name",student.getName());
+        model.addAttribute("email",student.getEmail());
+        model.addAttribute("phone",student.getPhoneNumber());
+        model.addAttribute("password",student.getPassword());
+        model.addAttribute("dp",student.getDp());
+        return "profile";
+    }
+
+    @PostMapping("/updateProfile")
+    public String updateProfile(@ModelAttribute Student student,HttpSession session)
+    {
+        studentService.saveOrUpdateStudent(student);
+
+        session.setAttribute("id",student.getStudentId());
+        session.setAttribute("email",student.getEmail());
+        session.setAttribute("password",student.getPassword());
+        session.setAttribute("accountType","student");
+        session.setAttribute("dp",student.getDp());
+
+        return "redirect:/student/profile";
     }
 }

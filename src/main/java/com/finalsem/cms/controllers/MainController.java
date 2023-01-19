@@ -35,21 +35,40 @@ public class MainController {
     @PostMapping("/signin")
     public String signin(Model model,@RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("accountType") String accountType, HttpSession session)
     {
-        int id=-1;
         if(accountType.equals("student"))
-            id= studentService.validateStudent(email, password);
-        else if(accountType.equals("instructor"))
-            id=instructorService.validateInstructor(email, password);
-        else
-            id=adminService.validateAdmin(email, password);
-
-        if(id!=-1)
         {
-            session.setAttribute("email",email);
-            session.setAttribute("password",password);
-            session.setAttribute("accountType",accountType);
-            session.setAttribute("id",id);
-            return "index";
+            Student s=studentService.validateStudent(email, password);
+            if (s != null) {
+                session.setAttribute("id",s.getStudentId());
+                session.setAttribute("email",s.getEmail());
+                session.setAttribute("password",s.getPassword());
+                session.setAttribute("accountType","student");
+                session.setAttribute("dp",s.getDp());
+                return "index";
+            }
+        } else if (accountType.equals("instructor"))
+        {
+            Instructor i=instructorService.validateInstructor(email, password);
+            if (i != null) {
+                session.setAttribute("id",i.getInstructorId());
+                session.setAttribute("email",i.getEmail());
+                session.setAttribute("password",i.getPassword());
+                session.setAttribute("accountType","instructor");
+                session.setAttribute("dp",i.getDp());
+                return "index";
+            }
+        }
+        else
+        {
+            Admin a=adminService.validateAdmin(email, password);
+            if (a != null) {
+                session.setAttribute("id",a.getAdminId());
+                session.setAttribute("email",a.getEmail());
+                session.setAttribute("password",a.getPassword());
+                session.setAttribute("accountType","admin");
+                session.setAttribute("dp",a.getDp());
+                return "index";
+            }
         }
 
         model.addAttribute("errorMessage","Email or password is incorrect");

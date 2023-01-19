@@ -31,80 +31,9 @@ public class AdminController {
     @PostMapping("/addAdmin")
     public String addAdmin(@ModelAttribute Admin admin)
     {
+        admin.setDp("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBKxzxsHLzob3TZu7h3qZBGu7wI8ZKnN8pnA&usqp=CAU");
         adminService.saveOrUpdateAdmin(admin);
         return "redirect:/signinForm";
-    }
-
-    // Get list of students
-    @GetMapping("/students")
-    private List<Student> addStudent(){
-        return studentService.getStudents();
-    }
-
-    // Get student
-    @GetMapping("/students/{id}")
-    private ResponseEntity<Student> updateStudent(@PathVariable("id") int id){
-        try{
-            return new ResponseEntity<>(studentService.getStudent(id), HttpStatus.OK);
-        }
-        catch(Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    // Update student
-    @PutMapping("/students/{id}")
-    private ResponseEntity<Student> updateStudent(@PathVariable("id") int id, @RequestBody Student student){
-        try{
-            studentService.saveOrUpdateStudent(student);
-            return new ResponseEntity<>(student, HttpStatus.OK);
-        }
-        catch(Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    // Add new student
-    @PostMapping("/students")
-    private ResponseEntity<Student> updateStudent(@RequestBody Student student){
-        try{
-            studentService.saveOrUpdateStudent(student);
-            return new ResponseEntity<>(student, HttpStatus.OK);
-        }
-        catch(Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    // Delete student
-    @DeleteMapping("/students/{id}")
-    private void deleteStudent(@PathVariable("id") int id) {
-        studentService.deleteStudent(id);
-    }
-
-    // Create new course
-    @PostMapping("/courses")
-    private ResponseEntity<Course> addCourse(@RequestBody Course course){
-        try{
-            courseService.saveOrUpdate(course);
-            return new ResponseEntity<>(course, HttpStatus.OK);
-        }
-        catch(Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-
-    // Get a particular course
-    @GetMapping("/courses/{id}")
-    private ResponseEntity<Course> addCourse(@PathVariable("id") int id){
-        try{
-            Course course = courseService.getCourse(id);
-            return new ResponseEntity<>(course, HttpStatus.OK);
-        }
-        catch(Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
     }
 
     @RequestMapping("/courses")
@@ -139,6 +68,33 @@ public class AdminController {
     {
         //
         return "redirect:/course/courseDetails";
+    }
+
+    @RequestMapping("/profile")
+    public String profile(Model model,HttpSession session)
+    {
+        Admin admin=adminService.getAdmin((Integer) session.getAttribute("id"));
+        model.addAttribute("id",admin.getAdminId());
+        model.addAttribute("name",admin.getName());
+        model.addAttribute("email",admin.getEmail());
+        model.addAttribute("phone",admin.getPhoneNumber());
+        model.addAttribute("password",admin.getPassword());
+        model.addAttribute("dp",admin.getDp());
+        return "profile";
+    }
+
+    @PostMapping("/updateProfile")
+    public String updateProfile(@ModelAttribute Admin admin,HttpSession session)
+    {
+        adminService.saveOrUpdateAdmin(admin);
+
+        session.setAttribute("id",admin.getAdminId());
+        session.setAttribute("email",admin.getEmail());
+        session.setAttribute("password",admin.getPassword());
+        session.setAttribute("accountType","admin");
+        session.setAttribute("dp",admin.getDp());
+
+        return "redirect:/admin/profile";
     }
 }
 

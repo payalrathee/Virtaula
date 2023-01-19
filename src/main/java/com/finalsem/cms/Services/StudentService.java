@@ -38,12 +38,9 @@ public class StudentService {
         return studentRepo.findById(id).get().getCourses();
     }
 
-    public int validateStudent(String email,String password)
+    public Student validateStudent(String email,String password)
     {
-        Student s=studentRepo.findByEmailAndPassword(email,password);
-        if(s!=null)
-            return s.getStudentId();
-        return -1;
+        return studentRepo.findByEmailAndPassword(email, password);
     }
     public boolean enroll(int courseId, String code, int studentId)
     {
