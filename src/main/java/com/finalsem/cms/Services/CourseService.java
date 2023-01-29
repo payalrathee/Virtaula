@@ -56,4 +56,16 @@ public class CourseService {
     {
         return assignmentRepo.findById(id).get();
     }
+    public void deleteAssignment(int id)
+    {
+        assignmentRepo.deleteById(id);
+    }
+    public void deleteStudyMaterial(int id)
+    {
+        studyMaterialRepo.deleteById(id);
+    }
+    public void deleteCourse(int id)
+    {
+        courseRepo.deleteById(id);
+    }
 }

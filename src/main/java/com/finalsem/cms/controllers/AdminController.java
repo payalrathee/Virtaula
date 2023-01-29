@@ -50,9 +50,9 @@ public class AdminController {
     }
 
     @PostMapping("/addCourse")
-    public String addCourse()
+    public String addCourse(@ModelAttribute Course course)
     {
-        //
+        courseService.saveOrUpdate(course);
         return "redirect:/admin/courses";
     }
 
@@ -68,6 +68,12 @@ public class AdminController {
     {
         //
         return "redirect:/course/courseDetails";
+    }
+    @RequestMapping("/deleteCourse/{id}")
+    public String deleteCourse(@PathVariable("id") int id)
+    {
+        courseService.deleteCourse(id);
+        return "redirect:/admin/courses";
     }
 
     @RequestMapping("/profile")

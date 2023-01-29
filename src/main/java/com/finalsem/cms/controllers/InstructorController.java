@@ -92,6 +92,19 @@ public class InstructorController {
         return "redirect:/course/assignmentDetails";
     }
 
+    @RequestMapping("/deleteAssignment/{id}")
+    public String deleteAssignment(@PathVariable("id") int id)
+    {
+        courseService.deleteAssignment(id);
+        return "redirect:/instructor/courses";
+    }
+    @RequestMapping("/deleteStudyMaterial/{id}")
+    public String deleteStudyMaterial(@PathVariable("id") int id)
+    {
+        courseService.deleteStudyMaterial(id);
+        return "redirect:/instructor/courses";
+    }
+
     @RequestMapping("/profile")
     public String profile(Model model,HttpSession session)
     {

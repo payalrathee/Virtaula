@@ -9,16 +9,16 @@
     <form class="wrapper" th:action="@{/admin/updateCourse}" method="post" style="width:70%;">
         <h1 class="large-text" style="text-align:center;">Update Course</h1>
         <h1 class="text">Course Details</h1>
-        <input type="hidden" class="input" placeholder="Enter course name" name="name" value="">
-        <input type="text" class="input" placeholder="Enter course name" name="name" value="">
-        <input type="text" class="input" placeholder="Enter course duration" name="duration">
-        <input type="number" class="input" placeholder="Enter batch size" name="batchSize">
-        <input type="text" class="input" placeholder="Enter subject" name="subject">
-        <input type="text" class="input" placeholder="Enter course price" name="price">
-        <input type="text" class="input" placeholder="Enter course code" name="code">
+        <input type="hidden" class="input" placeholder="Enter course id" name="id" th:attr="value=${course.courseId}">
+        <input type="text" class="input" placeholder="Enter course name" name="name" th:attr="value=${course.name}">
+        <input type="text" class="input" placeholder="Enter course duration" name="duration" th:attr="value=${course.duration}">
+        <input type="number" class="input" placeholder="Enter batch size" name="batchSize" th:attr="value=${course.batchSize}">
+        <input type="text" class="input" placeholder="Enter subject" name="subject" th:attr="value=${course.subject}">
+        <input type="text" class="input" placeholder="Enter course price" name="price" th:attr="value=${course.price}">
+        <input type="text" class="input" placeholder="Enter course code" name="code" th:attr="value=${course.code}">
         <hr>
         <h1 class="text">Tutors</h1>
-        <input type="text" class="input" placeholder="Enter tutor1" name="tutor1">
+        <input type="text" class="input" placeholder="Enter tutor1" name="tutor1" >
         <input type="text" class="input" placeholder="Enter tutor2" name="tutor2">
         <input type="text" class="input" placeholder="Enter tutor3" name="tutor3">
         <input type="submit" class="button" value="Save">

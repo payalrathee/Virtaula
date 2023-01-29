@@ -9,18 +9,19 @@
     <form class="wrapper" th:action="@{/instructor/addAssignment}" method="post" style="width:70%;">
         <h1 class="large-text" style="text-align:center;">Update Assignment</h1>
         <h3 class="text">Assignment Details</h3>
-        <input type="hidden" name="course" value="">
-        <input type="hidden" name="id" value="">
-        <input type="text" class="input" placeholder="Enter assignment topic" name="topic">
-        <input type="text" class="input" placeholder="Enter deadline" name="deadline">
-        <input type="number" class="input" placeholder="Enter marks" name="marks">
+        <input type="hidden" name="course" th:attr="value=${assignment.course}">
+        <input type="hidden" name="id" th:attr="value=${assignment.assignmentId}">
+        <input type="text" class="input" placeholder="Enter assignment topic" name="topic" th:attr="value=${assignment.topic}">
+        <input type="text" class="input" placeholder="Enter deadline" name="deadline" th:attr="value=${assignment.deadline}">
+        <input type="number" class="input" placeholder="Enter marks" name="marks" th:attr="value=${assignment.marks}">
         <hr>
         <h3 class="text">Question Set</h3>
         <input type="file" class="input" name="questionSet">
         <hr>
         <h3 class="text">Description</h3>
-        <textarea class="input" name="description" style="height:20vh;">
-    </textarea>
+        <textarea class="input" name="description" style="height:20vh;" th:text="${assignment.description}">
+
+        </textarea>
         <input type="submit" class="button" value="Save"/>
     </form>
 </div>
