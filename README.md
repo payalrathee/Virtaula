@@ -19,6 +19,8 @@
 
 ![1](https://user-images.githubusercontent.com/68552642/218278174-b8f52762-8dbb-4b88-95bb-91fe7981d120.png)
 
+![i](https://user-images.githubusercontent.com/68552642/218278876-4e99b776-562a-4746-ab31-35ea39faa0e9.png)
+
 ## Student Panel
 
 ![3](https://user-images.githubusercontent.com/68552642/218278181-7a317766-50b6-4c2d-913b-a25180179a74.png)
